@@ -11,4 +11,5 @@ export const env = {
   JWT_REFRESH_SECRET: process.env.JWT_REFRESH_SECRET || 'dev-refresh-secret',
   ACCESS_TOKEN_EXPIRES: process.env.ACCESS_TOKEN_EXPIRES || '2h',
   REFRESH_TOKEN_EXPIRES: process.env.REFRESH_TOKEN_EXPIRES || '7d',
+  CAPTCHA_SECRET: process.env.CAPTCHA_SECRET || 'dev-captcha-secret',
 };
