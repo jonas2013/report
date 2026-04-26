@@ -9,6 +9,7 @@ import userRoutes from './routes/users';
 import projectRoutes from './routes/projects';
 import reportRoutes from './routes/reports';
 import statsRoutes from './routes/stats';
+import captchaRoutes from './routes/captcha';
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.get('/health', async (_req, res) => {
 });
 
 // Routes
+app.use('/api/v1/captcha', captchaRoutes);
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/users', userRoutes);
 app.use('/api/v1/projects', projectRoutes);
