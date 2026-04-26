@@ -4,17 +4,23 @@ import { authenticate, AuthRequest } from '../middlewares/auth';
 import { login, refreshAccessToken, logout } from '../services/auth';
 import { prisma } from '../config/prisma';
 import { success, error } from '../utils/response';
+import { validateCaptchaToken } from './captcha';
 
 const router = Router();
 
 const loginSchema = z.object({
   email: z.string().email(),
   password: z.string().min(1),
+  captchaToken: z.string().min(1),
 });
 
 router.post('/login', async (req: Request, res: Response) => {
   const parsed = loginSchema.safeParse(req.body);
   if (!parsed.success) return error(res, '参数校验失败', 422);
+
+  if (!validateCaptchaToken(parsed.data.captchaToken)) {
+    return error(res, '验证码已过期，请重新验证', 400);
+  }
 
   try {
     const result = await login(parsed.data.email, parsed.data.password);
