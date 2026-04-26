@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s http://localhost:3001/health)",
+      "Bash(curl -s http://localhost:80)",
+      "Bash(curl -s -X POST http://localhost:3001/api/v1/auth/login -H 'Content-Type: application/json' -d '{\"email\":\"admin@example.com\",\"password\":\"Admin@123\"}')",
+      "Bash(curl -s -X POST http://localhost:3001/api/v1/auth/login -H 'Content-Type: application/json' -d '{\"email\":\"wang@example.com\",\"password\":\"Test@123\"}')",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(f'  success={d[\\\\\"success\\\\\"]}, error={d.get\\(\\\\\"error\\\\\",\\\\\"N/A\\\\\"\\)}'\\)\")",
+      "Bash(curl -s -X POST http://localhost/api/v1/auth/login -H 'Content-Type: application/json' -d '{\"email\":\"admin@example.com\",\"password\":\"Admin@123\"}')",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(f'通过 Nginx 登录: success={d[\\\\\"success\\\\\"]}, user={d[\\\\\"data\\\\\"][\\\\\"user\\\\\"][\\\\\"name\\\\\"]}'\\)\")",
+      "Bash(xxd)",
+      "Bash(sed -i '' 's|      todayDone: parsed.data.todayDone,|      todayDone: parsed.data.todayDone ? sanitizeHtml\\(parsed.data.todayDone, SANITIZE_OPTIONS\\) : undefined,|' /Users/jonas/report/packages/backend/src/routes/reports.ts)",
+      "Bash(sed -i '' 's|      tomorrowPlan: parsed.data.tomorrowPlan,|      tomorrowPlan: parsed.data.tomorrowPlan ? sanitizeHtml\\(parsed.data.tomorrowPlan, SANITIZE_OPTIONS\\) : undefined,|' /Users/jonas/report/packages/backend/src/routes/reports.ts)",
+      "Bash(sed -i '' 's|      blockers: parsed.data.blockers,|      blockers: parsed.data.blockers ? sanitizeHtml\\(parsed.data.blockers, SANITIZE_OPTIONS\\) : undefined,|' /Users/jonas/report/packages/backend/src/routes/reports.ts)"
+    ]
+  }
+}

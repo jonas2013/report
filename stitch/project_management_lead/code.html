@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ReportFlow Enterprise - Project Details</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#2d3133",
+                        "on-secondary-fixed-variant": "#004395",
+                        "on-secondary-fixed": "#001a42",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#76777d",
+                        "tertiary": "#000000",
+                        "on-primary-container": "#7c839b",
+                        "surface-bright": "#f7f9fb",
+                        "on-tertiary-fixed": "#0b1c30",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "primary-fixed-dim": "#bec6e0",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-tertiary-container": "#75859d",
+                        "on-background": "#191c1e",
+                        "surface-container-low": "#f2f4f6",
+                        "primary-container": "#131b2e",
+                        "tertiary-fixed-dim": "#b7c8e1",
+                        "tertiary-fixed": "#d3e4fe",
+                        "background": "#f7f9fb",
+                        "secondary-fixed": "#d8e2ff",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#bec6e0",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-primary": "#ffffff",
+                        "surface-dim": "#d8dadc",
+                        "on-surface": "#191c1e",
+                        "surface": "#f7f9fb",
+                        "on-surface-variant": "#45464d",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#38485d",
+                        "surface-container": "#eceef0",
+                        "error-container": "#ffdad6",
+                        "on-secondary-container": "#fefcff",
+                        "tertiary-container": "#0b1c30",
+                        "secondary": "#0058be",
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#dae2fd",
+                        "outline-variant": "#c6c6cd",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#e6e8ea",
+                        "primary": "#000000",
+                        "surface-tint": "#565e74",
+                        "on-primary-fixed": "#131b2e",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#2170e4",
+                        "surface-variant": "#e0e3e5"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "sm": "8px",
+                        "lg": "24px",
+                        "2xl": "48px",
+                        "xs": "4px",
+                        "base": "4px",
+                        "gutter": "20px",
+                        "margin": "32px",
+                        "md": "16px",
+                        "xl": "32px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "tabular-nums": ["Inter"],
+                        "display-xl": ["Inter"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "tabular-nums": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "display-xl": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-sm": ["13px", { "lineHeight": "18px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md h-screen flex overflow-hidden">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col gap-2 p-4 fixed left-0 top-0 h-screen w-64 border-r border-slate-200 bg-slate-50 z-40">
+<div class="mb-lg">
+<h1 class="text-base font-black text-slate-900 tracking-tight">项目管理</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Enterprise Suite</p>
+</div>
+<button class="bg-primary text-on-primary font-label-md text-label-md rounded px-md py-sm mb-md flex items-center justify-center gap-2 hover:bg-opacity-90 transition-opacity w-full">
+<span class="material-symbols-outlined text-[18px]">add</span>
+            创建新日报
+        </button>
+<div class="flex flex-col gap-1 flex-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-md font-['Inter'] text-xs font-medium text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[20px]">grid_view</span>
+                仪表盘
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 bg-white text-slate-900 border border-slate-200 rounded-md font-['Inter'] text-xs font-medium transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+                项目管理
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-md font-['Inter'] text-xs font-medium text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[20px]">description</span>
+                日报管理
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-md font-['Inter'] text-xs font-medium text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[20px]">group</span>
+                团队通讯录
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-md font-['Inter'] text-xs font-medium text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[20px]">bar_chart</span>
+                数据分析
+            </a>
+</div>
+<div class="flex flex-col gap-1 mt-auto pt-4 border-t border-slate-200">
+<a class="flex items-center gap-3 px-3 py-2 rounded-md font-['Inter'] text-xs font-medium text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+                设置
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-md font-['Inter'] text-xs font-medium text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[20px]">logout</span>
+                退出登录
+            </a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col md:ml-64 w-full bg-background overflow-hidden">
+<!-- TopAppBar -->
+<header class="flex items-center justify-between px-6 sticky top-0 z-50 w-full h-14 border-b bg-white border-slate-200">
+<div class="flex items-center gap-4">
+<div class="md:hidden text-xl font-bold tracking-tight text-slate-900">ReportFlow Enterprise</div>
+<div class="hidden md:flex relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span>
+<input class="pl-10 pr-4 py-1.5 bg-surface-container-low border border-slate-200 rounded text-sm w-64 focus:outline-none focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all font-body-sm" placeholder="Search across project..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-slate-500 hover:bg-slate-50 transition-colors cursor-pointer active:opacity-80 p-1 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-slate-500 hover:bg-slate-50 transition-colors cursor-pointer active:opacity-80 p-1 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<button class="text-slate-500 hover:bg-slate-50 transition-colors cursor-pointer active:opacity-80 p-1 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">apps</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-surface-container-high border border-outline-variant overflow-hidden ml-2 cursor-pointer">
+<img alt="Administrator Profile" class="w-full h-full object-cover" data-alt="Close up portrait of a professional corporate administrator in a modern office environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8sQjzw5J9xmxCbDW7CagCutrYoohQcplwRIlT_-uD6quLuq0U1ncpp8DchIVRnqlybnrsrnsApvnBW4jF1Job_EE4gpglCaPPOQcdsIZBk_utCtkbZrVovnuXRNZjIdQkQVjWEwDd44_Ghib4Z2lErefY8FWPrnQoGv-UxTXMj4xjwuutjukOkCLmPl9ql6-dF-Hs0Mu3EgA_J1vytEY8w3WUsIWCpqXlBcNSd37aoy6Q4i6C2Vi82k0WxBXi-OcUAhyULHls1Xa4"/>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<main class="flex-1 overflow-y-auto p-4 md:p-8 lg:px-12 flex justify-center">
+<div class="w-full max-w-7xl flex flex-col gap-lg">
+<!-- Project Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-2">
+<div>
+<div class="flex items-center gap-2 mb-2">
+<span class="px-2 py-0.5 bg-[#dcfce7] text-[#166534] rounded-full font-label-md text-label-md">Active</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+                                Q3 Phase 2
+                            </span>
+</div>
+<h2 class="font-display-xl text-display-xl text-on-surface">阿尔法凤凰重构项目</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-1">Enterprise infrastructure migration and security hardening.</p>
+</div>
+<div class="flex gap-3">
+<button class="px-4 py-2 border border-slate-200 rounded font-label-md text-label-md text-on-surface hover:bg-slate-50 transition-colors">
+                            编辑项目
+                        </button>
+<button class="px-4 py-2 bg-primary text-on-primary rounded font-label-md text-label-md hover:bg-opacity-90 transition-opacity">
+                            添加里程碑
+                        </button>
+</div>
+</div>
+<!-- Top Stats Bento -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-md">
+<!-- Completion -->
+<div class="bg-surface-container-lowest border border-slate-200 rounded-lg p-md col-span-1 md:col-span-2 flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<h3 class="font-headline-md text-headline-md text-on-surface">总体完成度</h3>
+<span class="material-symbols-outlined text-on-surface-variant">monitoring</span>
+</div>
+<div>
+<div class="flex items-end gap-2 mb-2">
+<span class="font-display-xl text-display-xl">68%</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mb-1">Ahead of schedule by 4 days</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full w-[68%]"></div>
+</div>
+</div>
+</div>
+<!-- Team Size -->
+<div class="bg-surface-container-lowest border border-slate-200 rounded-lg p-md flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<h3 class="font-headline-md text-headline-md text-on-surface">团队成员</h3>
+<span class="material-symbols-outlined text-on-surface-variant">group</span>
+</div>
+<div class="mt-4">
+<span class="font-display-xl text-display-xl">14</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant block mt-1">Active members</span>
+<div class="flex -space-x-2 mt-3">
+<img alt="Team member" class="w-8 h-8 rounded-full border-2 border-white" data-alt="Portrait of a young professional woman smiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBa7mS3A_-xAyOS9aN2EqvO6WlhDbv4LtO1gzqdWS5qjRCqrB7Dh3Gklrbr_VE90KVbyocxO6C-uJLNVAsSdt_gNhEQnXWOQbQKgX0-rW8bQOIbL4Jumd_B2UX6549BC1Z2vluy4n24VGe3obsseevGJ72aKFBNOdmryVZcf6jlsEUUw6gSx8UMBQIMRMA1M3W9Ol8nRsUhrw-qnrTafXfv45Pu3dF-scFulywrO-8Ao773hV988g9sLXO1leJqS7uOdtIhdIgXCb_T"/>
+<img alt="Team member" class="w-8 h-8 rounded-full border-2 border-white" data-alt="Portrait of a young professional man" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5DEhzMbfnJSGP_Bc8GnoZ7kYP2r23WARwt6gTXimC_Y3A9UToF6IOv9XQP7221Eju8lDDqMP24-Ju8F4RCmMw7nx25b8ixKA_opRaPaM6vT67af1-Rv7cJyKCeS8G5Spc51AlcbgC715D-u5mFCmAncF5oJZH6YlRpVA2wcTs9IfYYM8mi3TLJRhUDqHxDS2cijBaJljgPRhKnlchHMvWgeW7ltjvbNqWsbnLHQ4S_yzIgZemPWmNK4HajG6HfAvTcl81-2-7eZJ-"/>
+<img alt="Team member" class="w-8 h-8 rounded-full border-2 border-white" data-alt="Portrait of a professional woman looking forward" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJuRZsiU06bGLEawcPUNM9bEQW8bRfBYQv6NAug1Igf_3wSc_uDCUQLVasBZtIKi11iDHwaeC3YyXbLvJEs1m-RyH2Cu6hzh9Gn2jOvb8QAFKFjV-FrbcvKwgH7WNnnPp1BE_y77NcL5lF1xEMSfyvXdYTVy6W8o06SVZNeoJkRqwSfsWyDDeGXGzJscVkWYLxo9-Jjm5RvjKQQHLtIFjtLFpfqoM3rJrW2z8eNYeYCzNSwTny7HtyQppIew0DxTBD84C-qrdhWq7B"/>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-surface-container-high flex items-center justify-center font-tabular-nums text-tabular-nums text-xs">+11</div>
+</div>
+</div>
+</div>
+<!-- Report Frequency -->
+<div class="bg-surface-container-lowest border border-slate-200 rounded-lg p-md flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<h3 class="font-headline-md text-headline-md text-on-surface">日报提交率</h3>
+<span class="material-symbols-outlined text-on-surface-variant">receipt_long</span>
+</div>
+<div class="mt-4">
+<span class="font-display-xl text-display-xl">100%</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant block mt-1">Submission rate this week</span>
+<div class="mt-3 flex items-center gap-1">
+<div class="h-1.5 w-full bg-[#166534] rounded-full"></div>
+<div class="h-1.5 w-full bg-[#166534] rounded-full"></div>
+<div class="h-1.5 w-full bg-[#166534] rounded-full"></div>
+<div class="h-1.5 w-full bg-[#166534] rounded-full"></div>
+<div class="h-1.5 w-full bg-surface-container rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Content Split -->
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-lg h-full pb-8">
+<!-- Left Col: Members -->
+<div class="xl:col-span-1 flex flex-col h-[600px] bg-surface-container-lowest border border-slate-200 rounded-lg overflow-hidden">
+<div class="p-4 border-b border-slate-200 bg-white flex justify-between items-center sticky top-0 z-10">
+<h3 class="font-headline-md text-headline-md">项目成员</h3>
+<button class="text-secondary hover:text-on-secondary-fixed-variant transition-colors p-1">
+<span class="material-symbols-outlined text-[20px]">person_add</span>
+</button>
+</div>
+<div class="overflow-y-auto p-4 flex-1">
+<ul class="flex flex-col gap-4">
+<li class="flex items-center justify-between group p-2 hover:bg-surface-container-low rounded transition-colors -mx-2">
+<div class="flex items-center gap-3">
+<img alt="Alex Rivera" class="w-10 h-10 rounded-full" data-alt="Portrait of a professional man" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTwRxs9f4B8e7OhR2z4YNv1RzvuT9GYcT-Cd7PP8jCZk8l-hXnmLwG61V1kwR3ai4p_G0ZkfefltCKppBNPjd3MZW5TejUI88KfTtXUjq5jdZMRWuAq1CWbUGbDwhIttpnFFhTw73yAbrgrRkRh3nMu18Y9nNFiz5RQzbNZiRsGMH8kQ1thCdkx6ggt9B_9hn_fCi7v7N2YB7pqw6k9jHBzkSygGnwNQc02F_3FMruiN90aL_YdwNon7m8OtKreWQypr_m3EvwGtEk"/>
+<div>
+<p class="font-tabular-nums text-tabular-nums text-on-surface">Alex Rivera</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">负责人</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-on-surface cursor-pointer text-[18px]">more_vert</span>
+</li>
+<li class="flex items-center justify-between group p-2 hover:bg-surface-container-low rounded transition-colors -mx-2">
+<div class="flex items-center gap-3">
+<img alt="Sarah Chen" class="w-10 h-10 rounded-full" data-alt="Portrait of a professional woman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDreqee0VH2v-jtaozz-ZME21TfrgDcdycHm5E5b14Uwou2Cafq_FLN3GOQPwDGeKGEUgkVlYrSbIOpM3dZcRbOUTcaAUltVYqt8o05Lz3xrSp4SAcYxXKAz7i0bni0YwzMyLq57A7sg2RBZQL4jdQvDblkMb_lirMa6T5Zjo6h2VJY_p--Q0lzxbQc6B2BJOunHqZB1FUimxRvUkUNGoJ3s57VSLkIGrj_sWVhyaIlVNzbp04-pDvFxlTnRHeoF9LKps595k8tNvXC"/>
+<div>
+<p class="font-tabular-nums text-tabular-nums text-on-surface">Sarah Chen</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Senior Engineer</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-on-surface cursor-pointer text-[18px]">more_vert</span>
+</li>
+<li class="flex items-center justify-between group p-2 hover:bg-surface-container-low rounded transition-colors -mx-2">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-fixed text-on-primary-fixed flex items-center justify-center font-headline-md text-sm">
+                                            MJ
+                                        </div>
+<div>
+<p class="font-tabular-nums text-tabular-nums text-on-surface">Marcus Johnson</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">DevOps</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-on-surface cursor-pointer text-[18px]">more_vert</span>
+</li>
+<li class="flex items-center justify-between group p-2 hover:bg-surface-container-low rounded transition-colors -mx-2">
+<div class="flex items-center gap-3">
+<img alt="David Kim" class="w-10 h-10 rounded-full" data-alt="Portrait of a professional man" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6CtMAy22xsRPTMRaEczQ0aQpE1YbINlfLjg5dO7e-p9Izfnvlaop8u3JBMTGTx75rY3M65eEFdiZ4ayYRGWG4_fEKh8zZalo8tUIZ6UW944-Ti5lWuEVQZMs6IyX3yMiuWWV-liGgpWA6Sbh9-fSGfLC6pDNg_ak4ykixsk1WthsTwae9dkCNpQ7BN7c8NesJzvvSaM1uzMB4irHOWw9RDx1aczio2brjsXL0PXzSZ52_MaJNrpRtRZIyaYm9ntfUlvC113QKjS6n"/>
+<div>
+<p class="font-tabular-nums text-tabular-nums text-on-surface">David Kim</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">QA Specialist</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant group-hover:text-on-surface cursor-pointer text-[18px]">more_vert</span>
+</li>
+</ul>
+</div>
+</div>
+<!-- Right Col: Reports Feed -->
+<div class="xl:col-span-2 flex flex-col h-[600px] bg-surface-container-lowest border border-slate-200 rounded-lg overflow-hidden">
+<div class="p-4 border-b border-slate-200 bg-white sticky top-0 z-10">
+<div class="flex justify-between items-center mb-3">
+<h3 class="font-headline-md text-headline-md">今日日报动态</h3>
+<div class="flex gap-2">
+<button class="flex items-center gap-1 text-on-surface-variant hover:text-on-surface font-label-md text-label-md px-2 py-1 rounded bg-surface-container-low">
+<span class="material-symbols-outlined text-[16px]">filter_list</span>
+                                        筛选
+                                    </button>
+</div>
+</div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span>
+<input class="w-full pl-10 pr-4 py-1.5 bg-surface-container-low border border-slate-200 rounded text-sm focus:outline-none focus:border-secondary focus:ring-2 focus:ring-secondary/20 transition-all font-body-sm" placeholder="Search report contents..." type="text"/>
+</div>
+</div>
+<div class="overflow-y-auto p-4 flex-1 bg-surface-bright">
+<div class="flex flex-col gap-4">
+<!-- Report Card 1 -->
+<div class="bg-surface-container-lowest border border-slate-200 rounded p-4 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-2">
+<img alt="Sarah Chen" class="w-6 h-6 rounded-full" data-alt="Portrait of Sarah Chen" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCN84ae2M3Maq0_OkE0pOkd3_tVYU8KvCLe2fwar1_uajTFiH_VnLoSFGzcroO8Q-uMKkuMhzwV47J3R9ogUi-Z7IlkZEA5VrJSAk9u1YhnrpYlFHt1jjI7zugXYseLD7BeLLX7s2v98uK-_lZ0BIIE4gyxedLNMn7y2a9P9zn0_vGBl9booz4Ugp_Mh3iHk6UEZ6aO_AhWPMSPkA0UyZVwzGflIxPq17oW0yr5ADIWlFcCxzl0jeuFL3JsDTCVfI04GnLq_FpHMbdk"/>
+<span class="font-tabular-nums text-tabular-nums text-sm">Sarah Chen</span>
+<span class="text-on-surface-variant text-xs font-body-sm">•</span>
+<span class="text-on-surface-variant text-xs font-body-sm">Today, 4:30 PM</span>
+</div>
+<span class="px-2 py-0.5 bg-[#dcfce7] text-[#166534] rounded-full font-label-md text-[10px]">On Track</span>
+</div>
+<h4 class="font-headline-md text-base mb-2 text-on-surface">Frontend Integration Phase 1 Complete</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mb-3">Successfully merged the new authentication flow into the staging branch. All unit tests are passing. Started working on the dashboard skeleton for tomorrow.</p>
+<div class="flex gap-2">
+<span class="px-2 py-1 bg-surface-container-low text-on-surface-variant rounded font-body-sm text-xs border border-slate-200">#frontend</span>
+<span class="px-2 py-1 bg-surface-container-low text-on-surface-variant rounded font-body-sm text-xs border border-slate-200">#auth</span>
+</div>
+</div>
+<!-- Report Card 2 -->
+<div class="bg-surface-container-lowest border border-slate-200 rounded p-4 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-primary-fixed text-on-primary-fixed flex items-center justify-center font-headline-md text-[10px]">MJ</div>
+<span class="font-tabular-nums text-tabular-nums text-sm">Marcus Johnson</span>
+<span class="text-on-surface-variant text-xs font-body-sm">•</span>
+<span class="text-on-surface-variant text-xs font-body-sm">Today, 1:15 PM</span>
+</div>
+<span class="px-2 py-0.5 bg-[#fef08a] text-[#854d0e] rounded-full font-label-md text-[10px]">Blocker</span>
+</div>
+<h4 class="font-headline-md text-base mb-2 text-on-surface">Database Migration Issue</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mb-3">Encountered timeouts during the staging database migration script. Need DBA assistance to optimize the indexing strategy before we can proceed with the data load.</p>
+<div class="flex items-center gap-2 mt-2 pt-3 border-t border-slate-100">
+<button class="text-secondary font-label-md text-xs hover:underline">View Thread (2 replies)</button>
+</div>
+</div>
+<!-- Report Card 3 -->
+<div class="bg-surface-container-lowest border border-slate-200 rounded p-4 shadow-sm hover:shadow-md transition-shadow opacity-75">
+<div class="flex justify-between items-start mb-3">
+<div class="flex items-center gap-2">
+<img alt="David Kim" class="w-6 h-6 rounded-full" data-alt="Portrait of David Kim" src="https://lh3.googleusercontent.com/aida-public/AB6AXuATzxYBq3pk8ydUCs6rfKfLDXg72WOPfzOVFkoLy4zojSI1Nns0O2rLjFcPbElMPC-G1aEE-YzvzabRo-2FhxywAq-Gum1fUcJ4Wep064k6nYGXq6ng8u15HiVFzvjRY3cJQmnU-TJyd9lNgomuh8rxxOoTWsSVn4t26qX5JJXsGmIi24iYPCzW4MqoI3CNf3akndhI7ae94XazEC_7MWjtWxdG46ZrT-WQOYwQCGJvFZL1knLXjLNtMiayBmRY-2dtfB2laOQV5G0n"/>
+<span class="font-tabular-nums text-tabular-nums text-sm">David Kim</span>
+<span class="text-on-surface-variant text-xs font-body-sm">•</span>
+<span class="text-on-surface-variant text-xs font-body-sm">Yesterday, 5:45 PM</span>
+</div>
+<span class="px-2 py-0.5 bg-[#dcfce7] text-[#166534] rounded-full font-label-md text-[10px]">On Track</span>
+</div>
+<h4 class="font-headline-md text-base mb-2 text-on-surface">QA Regression Cycle Complete</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Completed the full regression suite for Sprint 12. Logged 3 minor UI bugs, no showstoppers. Ready for UAT sign-off.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

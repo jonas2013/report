@@ -1,0 +1,122 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String     @id @default(cuid())
+  name        String
+  email       String     @unique
+  password    String
+  avatar      String?
+  role        GlobalRole @default(MEMBER)
+  isActive    Boolean    @default(true)
+  deletedAt   DateTime?
+  lastLoginAt DateTime?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  ownedProjects  Project[]       @relation("ProjectOwner")
+  projectMembers ProjectMember[]
+  dailyReports   DailyReport[]
+  refreshTokens  RefreshToken[]
+
+  @@index([email])
+}
+
+enum GlobalRole {
+  ADMIN
+  MEMBER
+}
+
+model Project {
+  id          String        @id @default(cuid())
+  name        String
+  description String?
+  status      ProjectStatus @default(ACTIVE)
+  startDate   DateTime?
+  endDate     DateTime?
+  deletedAt   DateTime?
+  ownerId     String
+  owner       User           @relation("ProjectOwner", fields: [ownerId], references: [id])
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  members ProjectMember[]
+  reports DailyReport[]
+
+  @@index([ownerId])
+  @@index([status])
+}
+
+enum ProjectStatus {
+  ACTIVE
+  PAUSED
+  ARCHIVED
+  COMPLETED
+}
+
+model ProjectMember {
+  id        String      @id @default(cuid())
+  projectId String
+  userId    String
+  role      ProjectRole @default(MEMBER)
+  joinedAt  DateTime    @default(now())
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([projectId, userId])
+  @@index([projectId])
+  @@index([userId])
+}
+
+enum ProjectRole {
+  OWNER
+  MEMBER
+}
+
+model DailyReport {
+  id           String       @id @default(cuid())
+  projectId    String
+  userId       String
+  date         DateTime
+  content      String
+  progress     Int?         @default(0)
+  todayDone    String?
+  tomorrowPlan String?
+  blockers     String?
+  hours        Float?
+  status       ReportStatus @default(DRAFT)
+  version      Int          @default(1)
+  editHistory  Json?
+  submittedAt  DateTime?
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([projectId, userId, date])
+  @@index([projectId, date])
+  @@index([userId, date])
+}
+
+enum ReportStatus {
+  DRAFT
+  SUBMITTED
+}
+
+model RefreshToken {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}

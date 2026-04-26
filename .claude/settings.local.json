@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx pnpm *)",
+      "Bash(npx prisma *)",
+      "Bash(npx tsc *)",
+      "Bash(pnpm --filter backend exec tsc --noEmit)",
+      "Bash(pnpm --filter frontend exec tsc --noEmit)",
+      "Bash(pnpm --filter frontend exec vite build)",
+      "Bash(docker --version)",
+      "Bash(docker info *)",
+      "Bash(psql --version)",
+      "Bash(brew list *)",
+      "Bash(DATABASE_URL=\"postgresql://devuser:devpassword@localhost:5432/daily_report_dev\" npx prisma migrate dev --name init)"
+    ]
+  }
+}

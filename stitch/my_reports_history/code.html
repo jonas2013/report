@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+
+<html class="light" lang="zh"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>日报存档 - ReportFlow Enterprise</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#2d3133",
+                        "on-secondary-fixed-variant": "#004395",
+                        "on-secondary-fixed": "#001a42",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#76777d",
+                        "tertiary": "#000000",
+                        "on-primary-container": "#7c839b",
+                        "surface-bright": "#f7f9fb",
+                        "on-tertiary-fixed": "#0b1c30",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "primary-fixed-dim": "#bec6e0",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-tertiary-container": "#75859d",
+                        "on-background": "#191c1e",
+                        "surface-container-low": "#f2f4f6",
+                        "primary-container": "#131b2e",
+                        "tertiary-fixed-dim": "#b7c8e1",
+                        "tertiary-fixed": "#d3e4fe",
+                        "background": "#f7f9fb",
+                        "secondary-fixed": "#d8e2ff",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#bec6e0",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-primary": "#ffffff",
+                        "surface-dim": "#d8dadc",
+                        "on-surface": "#191c1e",
+                        "surface": "#f7f9fb",
+                        "on-surface-variant": "#45464d",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#38485d",
+                        "surface-container": "#eceef0",
+                        "error-container": "#ffdad6",
+                        "on-secondary-container": "#fefcff",
+                        "tertiary-container": "#0b1c30",
+                        "secondary": "#0058be",
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#dae2fd",
+                        "outline-variant": "#c6c6cd",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#e6e8ea",
+                        "primary": "#000000",
+                        "surface-tint": "#565e74",
+                        "on-primary-fixed": "#131b2e",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#2170e4",
+                        "surface-variant": "#e0e3e5"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "sm": "8px",
+                        "lg": "24px",
+                        "2xl": "48px",
+                        "xs": "4px",
+                        "base": "4px",
+                        "gutter": "20px",
+                        "margin": "32px",
+                        "md": "16px",
+                        "xl": "32px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "tabular-nums": ["Inter"],
+                        "display-xl": ["Inter"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "tabular-nums": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "display-xl": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-sm": ["13px", { "lineHeight": "18px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex">
+<!-- SideNavBar -->
+<nav class="h-screen w-64 border-r border-slate-200 bg-slate-50 flex flex-col gap-2 p-4 fixed left-0 top-0 hidden md:flex z-40">
+<div class="mb-lg px-md">
+<h1 class="text-base font-black text-slate-900">Project Management</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Enterprise Suite</p>
+</div>
+<button class="mb-lg w-full bg-[#0b1c30] text-white py-sm px-md rounded font-label-md text-label-md flex items-center justify-center gap-sm hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-[18px]">add</span>
+            创建新报告
+        </button>
+<div class="flex-1 flex flex-col gap-sm">
+<a class="flex items-center gap-md px-md py-sm rounded-md text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-all duration-150 ease-in-out font-['Inter'] text-xs font-medium" href="#">
+<span class="material-symbols-outlined">grid_view</span>
+                仪表盘
+            </a>
+<a class="flex items-center gap-md px-md py-sm rounded-md text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-all duration-150 ease-in-out font-['Inter'] text-xs font-medium" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+                项目管理
+            </a>
+<a class="flex items-center gap-md px-md py-sm rounded-md bg-white text-slate-900 border border-slate-200 transition-all duration-150 ease-in-out font-['Inter'] text-xs font-medium" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">description</span>
+                日报管理
+            </a>
+<a class="flex items-center gap-md px-md py-sm rounded-md text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-all duration-150 ease-in-out font-['Inter'] text-xs font-medium" href="#">
+<span class="material-symbols-outlined">group</span>
+                团队通讯录
+            </a>
+<a class="flex items-center gap-md px-md py-sm rounded-md text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-all duration-150 ease-in-out font-['Inter'] text-xs font-medium" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+                数据分析
+            </a>
+</div>
+<div class="mt-auto flex flex-col gap-sm pt-md border-t border-slate-200">
+<a class="flex items-center gap-md px-md py-sm rounded-md text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-all duration-150 ease-in-out font-['Inter'] text-xs font-medium" href="#">
+<span class="material-symbols-outlined">settings</span>
+                设置
+            </a>
+<a class="flex items-center gap-md px-md py-sm rounded-md text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-all duration-150 ease-in-out font-['Inter'] text-xs font-medium" href="#">
+<span class="material-symbols-outlined">logout</span>
+                退出登录
+            </a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col md:ml-64 w-full">
+<!-- TopAppBar -->
+<header class="w-full h-14 border-b border-slate-200 bg-white flex items-center justify-between px-6 sticky top-0 z-50">
+<div class="flex items-center gap-md">
+<button class="md:hidden text-slate-500 hover:bg-slate-50 p-sm rounded transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="text-xl font-bold tracking-tight text-slate-900 md:hidden">ReportFlow Enterprise</div>
+<div class="hidden md:flex items-center border border-outline-variant rounded bg-surface-bright px-md py-xs w-64 focus-within:border-secondary focus-within:ring-2 focus-within:ring-secondary/20 transition-all">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px] mr-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 font-body-sm text-body-sm w-full text-on-surface placeholder:text-on-surface-variant p-0" placeholder="搜索报告..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-sm">
+<button class="text-slate-900 font-['Inter'] text-sm tracking-tight hover:bg-slate-50 transition-colors p-sm rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-slate-900 font-['Inter'] text-sm tracking-tight hover:bg-slate-50 transition-colors p-sm rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<button class="text-slate-900 font-['Inter'] text-sm tracking-tight hover:bg-slate-50 transition-colors p-sm rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">apps</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-surface-container-highest ml-sm border border-outline-variant overflow-hidden">
+<img alt="Administrator Profile" class="w-full h-full object-cover" data-alt="Corporate headshot of a smiling man in a blue shirt against a neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDC6Btz1LCDqBqR-hFf1t5aEo6z0BcRPfX1a9U2nuOowWlrDJCRJP_rnpJDmJmKbPSXi6PVtvCTFQ9sgsZisGOwvBNYLU0cdIO8yxP701Cy_X59Yf7tO68XeCOcClDlJwcqhf6920jXmOz_-eekRPAavMK-0746pDOlGVlhpRPdpo5T_SWvlRr9Zn0-JiJVM9u6VsMXhfUFV1WyNvM0kJvAmUuxoRxFuVTTgeCsyO-Gr00L5bpQ77HgezZ4QO5eA4_v_7GBbS5Jg5ge"/>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<main class="flex-1 p-md md:p-lg lg:p-margin max-w-[1400px] mx-auto w-full">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-md mb-xl">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-background mb-xs">日报存档</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">查看并管理您提交的项目日报。</p>
+</div>
+<div class="flex flex-col sm:flex-row gap-sm">
+<div class="flex items-center border border-outline-variant rounded bg-surface-container-lowest px-md py-sm focus-within:border-secondary focus-within:ring-2 focus-within:ring-secondary/20 transition-all">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px] mr-sm">calendar_today</span>
+<input class="bg-transparent border-none focus:ring-0 font-body-md text-body-md w-full text-on-surface p-0 cursor-pointer" type="date"/>
+</div>
+<div class="flex items-center border border-outline-variant rounded bg-surface-container-lowest px-md py-sm focus-within:border-secondary focus-within:ring-2 focus-within:ring-secondary/20 transition-all">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px] mr-sm">filter_list</span>
+<select class="bg-transparent border-none focus:ring-0 font-body-md text-body-md w-full text-on-surface p-0 cursor-pointer appearance-none pr-md">
+<option>所有项目</option>
+<option>Apollo Migration</option>
+<option>Nexus Deployment</option>
+</select>
+</div>
+</div>
+</div>
+<!-- Today's Report (Editable) -->
+<section class="mb-xl">
+<h3 class="font-headline-md text-headline-md text-on-background mb-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-secondary">today</span>
+                    今日提交
+                </h3>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-lg hover:bg-[#F1F5F9] transition-colors group relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-secondary"></div>
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-md mb-md">
+<div>
+<div class="flex items-center gap-sm mb-xs">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Apollo Migration</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="font-tabular-nums text-tabular-nums text-on-surface-variant">Oct 24, 2023</span>
+</div>
+<h4 class="font-headline-md text-headline-md text-on-surface">Backend API Integration Status</h4>
+</div>
+<div class="flex items-center gap-md">
+<span class="inline-flex items-center gap-xs px-sm py-xs rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-md text-label-md">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+                                待审核
+                            </span>
+<button class="text-secondary font-label-md text-label-md flex items-center gap-xs border border-secondary rounded px-md py-xs hover:bg-secondary-fixed-dim transition-colors">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+                                编辑（下午5点前）
+                            </button>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-3xl line-clamp-2">
+                        Completed the initial endpoints for user authentication. Encountered minor delays with the OAuth token validation service, but implemented a temporary mock to unblock the frontend team. Expected to resolve the validation issue by tomorrow morning.
+                    </p>
+</div>
+</section>
+<!-- Historical Reports Grouped by Project -->
+<section class="space-y-xl">
+<!-- Project Group 1 -->
+<div>
+<div class="flex items-center justify-between mb-md pb-xs border-b border-outline-variant">
+<h3 class="font-headline-md text-headline-md text-on-background">Apollo Migration</h3>
+<span class="font-tabular-nums text-tabular-nums text-on-surface-variant">42 份报告</span>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-bright border-b border-outline-variant">
+<th class="font-label-md text-label-md text-on-surface-variant p-md w-32">日期</th>
+<th class="font-label-md text-label-md text-on-surface-variant p-md">摘要</th>
+<th class="font-label-md text-label-md text-on-surface-variant p-md w-32">工时</th>
+<th class="font-label-md text-label-md text-on-surface-variant p-md w-48">状态</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md text-on-surface divide-y divide-outline-variant">
+<tr class="hover:bg-[#F1F5F9] transition-colors h-[40px] cursor-pointer group">
+<td class="p-md font-tabular-nums text-tabular-nums">Oct 23, 2023</td>
+<td class="p-md text-on-surface-variant truncate max-w-[300px]">Database schema migrations for user table...</td>
+<td class="p-md font-tabular-nums text-tabular-nums">7.5h</td>
+<td class="p-md">
+<span class="inline-flex items-center gap-xs px-sm py-xs rounded-full bg-[#dcfce7] text-[#166534] font-label-md text-label-md">
+<span class="material-symbols-outlined text-[14px]">done_all</span>
+                                            已审阅
+                                        </span>
+</td>
+</tr>
+<tr class="hover:bg-[#F1F5F9] transition-colors h-[40px] bg-surface-bright cursor-pointer group">
+<td class="p-md font-tabular-nums text-tabular-nums">Oct 22, 2023</td>
+<td class="p-md text-on-surface-variant truncate max-w-[300px]">Sprint planning and backlog grooming...</td>
+<td class="p-md font-tabular-nums text-tabular-nums">8.0h</td>
+<td class="p-md">
+<span class="inline-flex items-center gap-xs px-sm py-xs rounded-full bg-[#dcfce7] text-[#166534] font-label-md text-label-md">
+<span class="material-symbols-outlined text-[14px]">done_all</span>
+                                            已审阅
+                                        </span>
+</td>
+</tr>
+<tr class="hover:bg-[#F1F5F9] transition-colors h-[40px] cursor-pointer group">
+<td class="p-md font-tabular-nums text-tabular-nums">Oct 20, 2023</td>
+<td class="p-md text-on-surface-variant truncate max-w-[300px]">Frontend state management setup with Redux...</td>
+<td class="p-md font-tabular-nums text-tabular-nums">6.5h</td>
+<td class="p-md">
+<span class="inline-flex items-center gap-xs px-sm py-xs rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md">
+<span class="material-symbols-outlined text-[14px]">visibility_off</span>
+                                            已归档
+                                        </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="mt-sm flex justify-center">
+<button class="font-label-md text-label-md text-secondary hover:underline py-sm px-md">查看更早的报告</button>
+</div>
+</div>
+<!-- Project Group 2 -->
+<div>
+<div class="flex items-center justify-between mb-md pb-xs border-b border-outline-variant">
+<h3 class="font-headline-md text-headline-md text-on-background">Nexus Deployment</h3>
+<span class="font-tabular-nums text-tabular-nums text-on-surface-variant">18 份报告</span>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-bright border-b border-outline-variant">
+<th class="font-label-md text-label-md text-on-surface-variant p-md w-32">日期</th>
+<th class="font-label-md text-label-md text-on-surface-variant p-md">摘要</th>
+<th class="font-label-md text-label-md text-on-surface-variant p-md w-32">工时</th>
+<th class="font-label-md text-label-md text-on-surface-variant p-md w-48">状态</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md text-on-surface divide-y divide-outline-variant">
+<tr class="hover:bg-[#F1F5F9] transition-colors h-[40px] cursor-pointer group">
+<td class="p-md font-tabular-nums text-tabular-nums">Oct 18, 2023</td>
+<td class="p-md text-on-surface-variant truncate max-w-[300px]">CI/CD pipeline configuration updates...</td>
+<td class="p-md font-tabular-nums text-tabular-nums">4.0h</td>
+<td class="p-md">
+<span class="inline-flex items-center gap-xs px-sm py-xs rounded-full bg-[#dcfce7] text-[#166534] font-label-md text-label-md">
+<span class="material-symbols-outlined text-[14px]">done_all</span>
+                                            已审阅
+                                        </span>
+</td>
+</tr>
+<tr class="hover:bg-[#F1F5F9] transition-colors h-[40px] bg-surface-bright cursor-pointer group">
+<td class="p-md font-tabular-nums text-tabular-nums">Oct 15, 2023</td>
+<td class="p-md text-on-surface-variant truncate max-w-[300px]">Security audit remediation tasks...</td>
+<td class="p-md font-tabular-nums text-tabular-nums">8.0h</td>
+<td class="p-md">
+<span class="inline-flex items-center gap-xs px-sm py-xs rounded-full bg-[#fef9c3] text-[#854d0e] font-label-md text-label-md">
+<span class="material-symbols-outlined text-[14px]">flag</span>
+                                            需补充说明
+                                        </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</main>
+</div>
+</body></html>
