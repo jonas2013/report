@@ -6,11 +6,11 @@ WORKDIR /app
 RUN npm install -g pnpm
 
 COPY package.json pnpm-lock.yaml* ./
-RUN pnpm install
+RUN pnpm install && pnpm approve-builds canvas bcrypt esbuild
 
 COPY . .
 RUN npx prisma generate
-RUN npm rebuild bcrypt
+RUN npm rebuild bcrypt canvas
 RUN pnpm build
 
 FROM node:20-alpine AS runner
