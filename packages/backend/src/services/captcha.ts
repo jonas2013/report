@@ -96,29 +96,30 @@ export function generatePuzzle() {
   const pieceX = Math.floor(Math.random() * (WIDTH - PIECE_SIZE - PROTRUSION * 2 - 40)) + PROTRUSION + 20;
   const pieceY = Math.floor(Math.random() * (HEIGHT - PIECE_SIZE - PROTRUSION * 2 - 20)) + PROTRUSION + 10;
 
-  ctx.save();
-  drawPuzzlePath(ctx, pieceX, pieceY);
-  ctx.fillStyle = 'rgba(0,0,0,0.4)';
-  ctx.fillRect(0, 0, WIDTH, HEIGHT);
-  ctx.restore();
-
-  drawPuzzleBorder(ctx, pieceX, pieceY);
-
+  // Extract slider piece from CLEAN background before overlay
   const sliderCanvas = createCanvas(PIECE_SIZE + PROTRUSION * 2, PIECE_SIZE + PROTRUSION * 2);
   const sliderCtx = sliderCanvas.getContext('2d');
-
   sliderCtx.save();
   drawPuzzlePath(sliderCtx, PROTRUSION, PROTRUSION);
   sliderCtx.drawImage(canvas, pieceX - PROTRUSION, pieceY - PROTRUSION,
     PIECE_SIZE + PROTRUSION * 2, PIECE_SIZE + PROTRUSION * 2,
     0, 0, PIECE_SIZE + PROTRUSION * 2, PIECE_SIZE + PROTRUSION * 2);
   sliderCtx.restore();
-
   drawPuzzleBorder(sliderCtx, PROTRUSION, PROTRUSION);
+
+  // Now apply hole overlay on background
+  ctx.save();
+  drawPuzzlePath(ctx, pieceX, pieceY);
+  ctx.fillStyle = 'rgba(0,0,0,0.5)';
+  ctx.fillRect(0, 0, WIDTH, HEIGHT);
+  ctx.restore();
+  drawPuzzleBorder(ctx, pieceX, pieceY);
 
   const captchaId = crypto.randomUUID();
   store.set(captchaId, {
-    correctX: pieceX,
+    // Slider piece image has PROTRUSION padding, so visual alignment
+    // happens at sliderX = pieceX - PROTRUSION
+    correctX: pieceX - PROTRUSION,
     fails: 0,
     expiresAt: Date.now() + TTL_MS,
   });
