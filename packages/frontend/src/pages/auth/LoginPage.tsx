@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
+import { SliderCaptcha } from '../../components/Common/SliderCaptcha';
 
 export function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [captchaToken, setCaptchaToken] = useState('');
+  const [showCaptcha, setShowCaptcha] = useState(false);
   const [err, setErr] = useState('');
   const { login } = useAuth();
   const navigate = useNavigate();
@@ -12,12 +15,29 @@ export function LoginPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErr('');
+
+    if (!showCaptcha) {
+      setShowCaptcha(true);
+      return;
+    }
+
+    if (!captchaToken) {
+      setErr('请完成滑块验证');
+      return;
+    }
+
     try {
-      const { user } = await login(email, password);
+      const { user } = await login(email, password, captchaToken);
       navigate(user.role === 'ADMIN' ? '/admin' : '/dashboard');
     } catch (e: any) {
       setErr(e.response?.data?.error || '登录失败');
+      setCaptchaToken('');
+      setShowCaptcha(false);
     }
+  };
+
+  const handleCaptchaSuccess = (token: string) => {
+    setCaptchaToken(token);
   };
 
   return (
@@ -55,16 +75,27 @@ export function LoginPage() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              onFocus={() => {
+                if (!showCaptcha && email && password) setShowCaptcha(true);
+              }}
               className="w-full border border-outline-variant rounded h-10 px-3 text-sm focus:outline-none focus:border-secondary focus:ring-2 focus:ring-secondary/20"
               placeholder="请输入密码"
               required
             />
           </div>
+
+          {showCaptcha && (
+            <div className="flex justify-center">
+              <SliderCaptcha onSuccess={handleCaptchaSuccess} />
+            </div>
+          )}
+
           <button
             type="submit"
-            className="w-full bg-primary text-on-primary h-10 rounded font-medium hover:bg-inverse-surface transition-colors"
+            className="w-full bg-primary text-on-primary h-10 rounded font-medium hover:bg-inverse-surface transition-colors disabled:opacity-50"
+            disabled={showCaptcha && !captchaToken}
           >
-            登录
+            {showCaptcha ? '登录' : '下一步'}
           </button>
         </form>
 
