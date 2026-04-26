@@ -1,6 +1,6 @@
 FROM node:20-alpine AS builder
 
-RUN apk add --no-cache python3 make g++
+RUN apk add --no-cache python3 make g++ cairo-dev pango-dev jpeg-dev giflib-dev
 
 WORKDIR /app
 RUN npm install -g pnpm
@@ -14,6 +14,8 @@ RUN npm rebuild bcrypt
 RUN pnpm build
 
 FROM node:20-alpine AS runner
+
+RUN apk add --no-cache cairo pango libjpeg-turbo giflib
 
 WORKDIR /app
 
