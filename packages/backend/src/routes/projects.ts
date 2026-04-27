@@ -161,9 +161,33 @@ router.put('/:id/members/:userId/role', requireProjectAccess('OWNER'), async (re
   const parsed = updateRoleSchema.safeParse(req.body);
   if (!parsed.success) return error(res, '参数校验失败', 422);
 
-  const member = await prisma.projectMember.update({
-    where: { projectId_userId: { projectId: req.params.id, userId: req.params.userId } },
-    data: { role: parsed.data.role },
+  const projectId = req.params.id;
+  const targetUserId = req.params.userId;
+  const newRole = parsed.data.role;
+
+  await prisma.$transaction(async (tx) => {
+    if (newRole === 'OWNER') {
+      const currentOwner = await tx.projectMember.findFirst({
+        where: { projectId, role: 'OWNER' },
+      });
+      if (currentOwner && currentOwner.userId !== targetUserId) {
+        await tx.projectMember.update({
+          where: { projectId_userId: { projectId, userId: currentOwner.userId } },
+          data: { role: 'MEMBER' },
+        });
+      }
+      await tx.project.update({ where: { id: projectId }, data: { ownerId: targetUserId } });
+    }
+
+    await tx.projectMember.update({
+      where: { projectId_userId: { projectId, userId: targetUserId } },
+      data: { role: newRole },
+    });
+  });
+
+  const member = await prisma.projectMember.findUnique({
+    where: { projectId_userId: { projectId, userId: targetUserId } },
+    include: { user: { select: { id: true, name: true, email: true, avatar: true } } },
   });
   return success(res, member);
 });

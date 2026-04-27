@@ -8,8 +8,10 @@ import Placeholder from '@tiptap/extension-placeholder';
 import api from '../../services/api';
 
 export function WriteReportPage() {
-  const { projectId } = useParams();
+  const { projectId: urlProjectId } = useParams();
   const navigate = useNavigate();
+  const [projects, setProjects] = useState<any[]>([]);
+  const [selectedProjectId, setSelectedProjectId] = useState('');
   const [project, setProject] = useState<any>(null);
   const [hours, setHours] = useState('');
   const [blockers, setBlockers] = useState('');
@@ -18,6 +20,8 @@ export function WriteReportPage() {
   const [reportId, setReportId] = useState<string | null>(null);
   const saveTimer = useRef<ReturnType<typeof setTimeout>>();
 
+  const activeProjectId = urlProjectId || selectedProjectId;
+
   const editor = useEditor({
     extensions: [StarterKit, TaskList, TaskItem, Placeholder.configure({ placeholder: '详细描述今天完成的工作...' })],
     content: '',
@@ -25,9 +29,25 @@ export function WriteReportPage() {
   });
 
   useEffect(() => {
-    if (projectId) api.get(`/projects/${projectId}`).then((r) => setProject(r.data.data)).catch(() => {});
+    if (urlProjectId) {
+      api.get(`/projects/${urlProjectId}`).then((r) => setProject(r.data.data)).catch(() => {});
+    } else {
+      api.get('/projects?limit=100').then((r) => {
+        const list = r.data.data.data;
+        setProjects(list);
+        if (list.length === 1) setSelectedProjectId(list[0].id);
+      });
+    }
     return () => { if (saveTimer.current) clearTimeout(saveTimer.current); };
-  }, [projectId]);
+  }, [urlProjectId]);
+
+  useEffect(() => {
+    if (selectedProjectId) {
+      api.get(`/projects/${selectedProjectId}`).then((r) => setProject(r.data.data)).catch(() => {});
+    } else if (!urlProjectId) {
+      setProject(null);
+    }
+  }, [selectedProjectId, urlProjectId]);
 
   const triggerSave = (content: string) => {
     if (saveTimer.current) clearTimeout(saveTimer.current);
@@ -35,14 +55,14 @@ export function WriteReportPage() {
   };
 
   const saveDraft = async (content: string) => {
-    if (!content || content === '<p></p>') return;
+    if (!content || content === '<p></p>' || !activeProjectId) return;
     setSaveStatus('saving');
     try {
       if (reportId) {
-        await api.put(`/reports/${projectId}/${reportId}`, { content, hours: parseFloat(hours) || undefined, blockers, tomorrowPlan });
+        await api.put(`/reports/${activeProjectId}/${reportId}`, { content, hours: parseFloat(hours) || undefined, blockers, tomorrowPlan });
       } else {
         const today = new Date().toISOString().split('T')[0];
-        const { data } = await api.post(`/reports/${projectId}`, {
+        const { data } = await api.post(`/reports/${activeProjectId}`, {
           date: today, content, todayDone: content.replace(/<[^>]+>/g, '').slice(0, 200),
           hours: parseFloat(hours) || undefined, blockers, tomorrowPlan,
         });
@@ -56,14 +76,14 @@ export function WriteReportPage() {
   };
 
   const handleSubmit = async () => {
-    if (!editor?.getText().trim()) return;
+    if (!editor?.getText().trim() || !activeProjectId) return;
     const content = editor.getHTML();
     await saveDraft(content);
 
     if (reportId) {
-      await api.put(`/reports/${projectId}/${reportId}/submit`);
+      await api.put(`/reports/${activeProjectId}/${reportId}/submit`);
     }
-    navigate(`/projects/${projectId}/reports`);
+    navigate(`/projects/${activeProjectId}/reports`);
   };
 
   const today = new Date().toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' });
@@ -81,13 +101,39 @@ export function WriteReportPage() {
         </div>
       </div>
 
-      {/* Project info */}
-      {project && (
+      {/* Project selector or info */}
+      {urlProjectId && project ? (
         <div className="bg-surface-container-lowest border border-outline-variant rounded-lg p-md mb-lg">
           <div className="grid grid-cols-2 gap-md">
             <div>
               <div className="text-xs font-semibold text-on-surface-variant uppercase mb-1">项目</div>
               <div className="font-medium text-on-surface">{project.name}</div>
+            </div>
+            <div>
+              <div className="text-xs font-semibold text-on-surface-variant uppercase mb-1">登记工时</div>
+              <input
+                type="number" value={hours} onChange={(e) => setHours(e.target.value)}
+                min="0" max="24" step="0.5" placeholder="例如：8.0"
+                className="w-full border border-outline-variant rounded h-10 px-3 text-sm focus:outline-none focus:border-secondary focus:ring-2 focus:ring-secondary/20"
+              />
+            </div>
+          </div>
+        </div>
+      ) : !urlProjectId && (
+        <div className="bg-surface-container-lowest border border-outline-variant rounded-lg p-md mb-lg">
+          <div className="grid grid-cols-2 gap-md">
+            <div>
+              <div className="text-xs font-semibold text-on-surface-variant uppercase mb-1">选择项目 *</div>
+              <select
+                value={selectedProjectId}
+                onChange={(e) => { setSelectedProjectId(e.target.value); setReportId(null); }}
+                className="w-full border border-outline-variant rounded h-10 px-3 text-sm bg-white focus:outline-none focus:border-secondary"
+              >
+                <option value="">请选择项目...</option>
+                {projects.map((p) => (
+                  <option key={p.id} value={p.id}>{p.name}</option>
+                ))}
+              </select>
             </div>
             <div>
               <div className="text-xs font-semibold text-on-surface-variant uppercase mb-1">登记工时</div>
@@ -159,11 +205,11 @@ export function WriteReportPage() {
           {saveStatus === 'error' && '保存失败'}
         </div>
         <div className="flex items-center gap-md">
-          <button onClick={() => saveDraft(editor?.getHTML() || '')} className="text-sm bg-white border border-outline-variant px-5 py-2.5 rounded hover:bg-surface-container-low transition-colors flex items-center gap-2">
+          <button onClick={() => saveDraft(editor?.getHTML() || '')} disabled={!activeProjectId} className="text-sm bg-white border border-outline-variant px-5 py-2.5 rounded hover:bg-surface-container-low transition-colors flex items-center gap-2 disabled:opacity-50">
             <span className="material-symbols-outlined text-sm">save</span>
             保存草稿
           </button>
-          <button onClick={handleSubmit} className="text-sm bg-primary text-on-primary px-6 py-2.5 rounded hover:bg-inverse-surface transition-colors flex items-center gap-2 shadow-sm">
+          <button onClick={handleSubmit} disabled={!activeProjectId} className="text-sm bg-primary text-on-primary px-6 py-2.5 rounded hover:bg-inverse-surface transition-colors flex items-center gap-2 shadow-sm disabled:opacity-50">
             提交日报
             <span className="material-symbols-outlined text-sm">send</span>
           </button>

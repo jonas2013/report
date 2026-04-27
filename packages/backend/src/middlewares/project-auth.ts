@@ -5,7 +5,7 @@ import { error } from '../utils/response';
 
 export const requireProjectAccess = (requiredRole?: 'OWNER' | 'MEMBER') => {
   return async (req: Request, res: Response, next: NextFunction) => {
-    const { id: projectId } = req.params;
+    const projectId = (req.params as any).id || (req.params as any).projectId;
     const userId = (req as AuthRequest).user.id;
     const userRole = (req as AuthRequest).user.role;
 
