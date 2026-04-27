@@ -78,7 +78,7 @@ router.get('/my/today', async (req: Request, res: Response) => {
 });
 
 // Project reports
-router.get('/:projectId/reports', requireProjectAccess(), async (req: Request, res: Response) => {
+router.get('/:projectId', requireProjectAccess(), async (req: Request, res: Response) => {
   const user = (req as AuthRequest).user;
   const { projectId } = req.params;
   const { userId, startDate, endDate, status, page = '1', limit = '20' } = req.query;
@@ -120,7 +120,7 @@ router.get('/:projectId/reports', requireProjectAccess(), async (req: Request, r
   return paginate(res, reports, total, p, l);
 });
 
-router.post('/:projectId/reports', requireProjectAccess(), async (req: Request, res: Response) => {
+router.post('/:projectId', requireProjectAccess(), async (req: Request, res: Response) => {
   const parsed = createReportSchema.safeParse(req.body);
   if (!parsed.success) return error(res, '参数校验失败', 422);
 
@@ -150,7 +150,7 @@ router.post('/:projectId/reports', requireProjectAccess(), async (req: Request, 
   return success(res, report, '日报已创建', 201);
 });
 
-router.get('/:projectId/reports/:reportId', requireProjectAccess(), async (req: Request, res: Response) => {
+router.get('/:projectId/:reportId', requireProjectAccess(), async (req: Request, res: Response) => {
   const report = await prisma.dailyReport.findUnique({
     where: { id: req.params.reportId },
     include: { user: { select: { id: true, name: true, avatar: true } }, project: { select: { id: true, name: true } } },
@@ -164,7 +164,7 @@ router.get('/:projectId/reports/:reportId', requireProjectAccess(), async (req: 
   return success(res, report);
 });
 
-router.put('/:projectId/reports/:reportId', requireProjectAccess(), async (req: Request, res: Response) => {
+router.put('/:projectId/:reportId', requireProjectAccess(), async (req: Request, res: Response) => {
   const user = (req as AuthRequest).user;
   const report = await prisma.dailyReport.findUnique({ where: { id: req.params.reportId } });
   if (!report) return error(res, '日报不存在', 404);
@@ -186,7 +186,7 @@ router.put('/:projectId/reports/:reportId', requireProjectAccess(), async (req: 
   return success(res, updated);
 });
 
-router.delete('/:projectId/reports/:reportId', requireProjectAccess(), async (req: Request, res: Response) => {
+router.delete('/:projectId/:reportId', requireProjectAccess(), async (req: Request, res: Response) => {
   const user = (req as AuthRequest).user;
   const report = await prisma.dailyReport.findUnique({ where: { id: req.params.reportId } });
   if (!report) return error(res, '日报不存在', 404);
@@ -197,7 +197,7 @@ router.delete('/:projectId/reports/:reportId', requireProjectAccess(), async (re
   return success(res, null, '日报已删除');
 });
 
-router.put('/:projectId/reports/:reportId/submit', requireProjectAccess(), async (req: Request, res: Response) => {
+router.put('/:projectId/:reportId/submit', requireProjectAccess(), async (req: Request, res: Response) => {
   const user = (req as AuthRequest).user;
   const report = await prisma.dailyReport.findUnique({ where: { id: req.params.reportId } });
   if (!report) return error(res, '日报不存在', 404);
@@ -212,7 +212,7 @@ router.put('/:projectId/reports/:reportId/submit', requireProjectAccess(), async
   return success(res, updated, '日报已提交');
 });
 
-router.put('/:projectId/reports/:reportId/recall', requireProjectAccess(), async (req: Request, res: Response) => {
+router.put('/:projectId/:reportId/recall', requireProjectAccess(), async (req: Request, res: Response) => {
   const user = (req as AuthRequest).user;
   const report = await prisma.dailyReport.findUnique({ where: { id: req.params.reportId } });
   if (!report) return error(res, '日报不存在', 404);
@@ -233,7 +233,7 @@ router.put('/:projectId/reports/:reportId/recall', requireProjectAccess(), async
 });
 
 // Stats
-router.get('/:projectId/reports/stats', requireProjectAccess(), async (req: Request, res: Response) => {
+router.get('/:projectId/stats', requireProjectAccess(), async (req: Request, res: Response) => {
   const user = (req as AuthRequest).user;
   const { projectId } = req.params;
 

@@ -30,7 +30,7 @@ export function ProjectReportsPage() {
     if (filterStatus) params.set('status', filterStatus);
     if (filterMember) params.set('userId', filterMember);
     params.set('limit', '50');
-    api.get(`/projects/${id}/reports?${params}`).then((r) => setReports(r.data.data.data));
+    api.get(`/reports/${id}?${params}`).then((r) => setReports(r.data.data.data));
   }, [id, filterStatus, filterMember]);
 
   // Group by date

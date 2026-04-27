@@ -30,7 +30,7 @@ export function AdminReportsPage() {
     params.set('limit', '100');
     if (filterStatus) params.set('status', filterStatus);
     if (filterMember) params.set('userId', filterMember);
-    const { data } = await api.get(`/projects/${selectedProject}/reports?${params}`);
+    const { data } = await api.get(`/reports/${selectedProject}?${params}`);
     setReports(data.data.data);
   };
 

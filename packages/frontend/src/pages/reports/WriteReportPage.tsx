@@ -39,10 +39,10 @@ export function WriteReportPage() {
     setSaveStatus('saving');
     try {
       if (reportId) {
-        await api.put(`/projects/${projectId}/reports/${reportId}`, { content, hours: parseFloat(hours) || undefined, blockers, tomorrowPlan });
+        await api.put(`/reports/${projectId}/${reportId}`, { content, hours: parseFloat(hours) || undefined, blockers, tomorrowPlan });
       } else {
         const today = new Date().toISOString().split('T')[0];
-        const { data } = await api.post(`/projects/${projectId}/reports`, {
+        const { data } = await api.post(`/reports/${projectId}`, {
           date: today, content, todayDone: content.replace(/<[^>]+>/g, '').slice(0, 200),
           hours: parseFloat(hours) || undefined, blockers, tomorrowPlan,
         });
@@ -61,7 +61,7 @@ export function WriteReportPage() {
     await saveDraft(content);
 
     if (reportId) {
-      await api.put(`/projects/${projectId}/reports/${reportId}/submit`);
+      await api.put(`/reports/${projectId}/${reportId}/submit`);
     }
     navigate(`/projects/${projectId}/reports`);
   };

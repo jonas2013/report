@@ -9,7 +9,7 @@ export function ProjectStatsPage() {
   const [activity, setActivity] = useState<any[]>([]);
 
   useEffect(() => {
-    api.get(`/projects/${id}/reports/stats`).then((r) => setStats(r.data.data));
+    api.get(`/reports/${id}/stats`).then((r) => setStats(r.data.data));
     api.get(`/stats/projects/${id}/activity`).then((r) => setActivity(r.data.data));
   }, [id]);
 

@@ -10,7 +10,7 @@ export function AdminDashboardPage() {
     api.get('/projects?limit=5').then((r) => {
       // Get recent reports from first project
       if (r.data.data.data.length > 0) {
-        api.get(`/projects/${r.data.data.data[0].id}/reports?limit=5`).then((rr) => setReports(rr.data.data.data));
+        api.get(`/reports/${r.data.data.data[0].id}?limit=5`).then((rr) => setReports(rr.data.data.data));
       }
     });
   }, []);
