@@ -49,7 +49,7 @@ export function ProjectListPage() {
                 </Link>
                 <span className={statusBadge(p.status)}>{statusLabel(p.status)}</span>
               </div>
-              {p.description && <p className="text-sm text-on-surface-variant mb-md line-clamp-2">{p.description}</p>}
+              {p.description && <p className="text-sm text-on-surface-variant mb-md line-clamp-2">{p.description.replace(/<[^>]+>/g, '')}</p>}
               <div className="flex items-center gap-md text-sm text-on-surface-variant">
                 <span className="flex items-center gap-1">
                   <span className="material-symbols-outlined text-sm">person</span>
